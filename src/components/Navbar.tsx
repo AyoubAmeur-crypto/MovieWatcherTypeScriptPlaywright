@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-function Navbar() {
+interface NavbarProps {
+  onLogout?: () => void
+}
+
+function Navbar({ onLogout }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -50,38 +54,50 @@ function Navbar() {
           </h1>
         </div>
 
-        {/* Right — mobile menu button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-zinc-400 transition-all duration-300 md:hidden hover:bg-zinc-800 hover:text-[#F5C518]"
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="h-6 w-6 transition-transform duration-300"
-            style={{
-              transform: mobileMenuOpen ? 'rotate(90deg)' : 'rotate(0deg)',
-            }}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* Right — logout button (desktop) + mobile menu button */}
+        <div className="flex items-center gap-3">
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              data-testid="logout-button"
+              className="hidden px-4 py-2 text-sm font-medium text-zinc-300 transition-all duration-200 hover:text-[#F5C518] hover:bg-zinc-800/60 rounded-lg md:inline-flex"
+            >
+              Logout
+            </button>
+          )}
+          
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="inline-flex items-center justify-center rounded-lg p-2 text-zinc-400 transition-all duration-300 md:hidden hover:bg-zinc-800 hover:text-[#F5C518]"
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
+            <svg
+              className="h-6 w-6 transition-transform duration-300"
+              style={{
+                transform: mobileMenuOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+              }}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {mobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu with smooth animation */}
@@ -107,6 +123,20 @@ function Navbar() {
               {item}
             </a>
           ))}
+          {onLogout && (
+            <button
+              onClick={() => {
+                onLogout()
+                setMobileMenuOpen(false)
+              }}
+              className="w-full text-left transform rounded-lg px-4 py-2.5 text-sm font-medium text-zinc-300 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400 hover:pl-6"
+              style={{
+                transitionDelay: mobileMenuOpen ? `${navItems.length * 30}ms` : '0ms',
+              }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </nav>

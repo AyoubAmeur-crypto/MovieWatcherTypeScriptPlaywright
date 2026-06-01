@@ -37,6 +37,7 @@ export default function MovieCard({
   return (
     <Link to={`/movie/${id}`} style={{ textDecoration: 'none' }}>
       <article
+        data-testid="movieCard"
         className="group relative overflow-hidden rounded-2xl bg-[#0e0e0e] transition-all duration-500 hover:-translate-y-1 cursor-pointer"
         style={{
           border: '1px solid rgba(255,255,255,0.06)',
@@ -145,8 +146,7 @@ export default function MovieCard({
             </p>
 
             {/* Watch button */}
-            <Link
-              to={`/movie/${id}`}
+            <button
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-black transition-all duration-200 hover:brightness-110 active:scale-95"
               style={{ backgroundColor: '#F5C518', textDecoration: 'none' }}
             >
@@ -159,7 +159,7 @@ export default function MovieCard({
                 <polygon points="5 3 19 12 5 21 5 3" />
               </svg>
               Watch Now
-            </Link>
+            </button>
           </div>
         </div>
       </div>
