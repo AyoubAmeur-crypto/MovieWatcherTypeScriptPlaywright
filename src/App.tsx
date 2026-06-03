@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
@@ -16,29 +16,50 @@ function App() {
     setIsLoggedIn(false)
   }
 
-  if (!isLoggedIn) {
-    return <Login onLogin={() => setIsLoggedIn(true)} />
-  }
-
   return (
     <Router>
       <Routes>
-        {/* Main Page */}
+        {/* Login Page */}
         <Route
           path="/"
           element={
-            <div className="min-h-screen bg-black text-white">
-              <Navbar onLogout={handleLogout} />
-              <Hero />
-              <Search />
-              <WatchlistForm />
-              <LayoutCard />
-            </div>
+            isLoggedIn ? (
+              <Navigate to="/home" replace />
+            ) : (
+              <Login onLogin={() => setIsLoggedIn(true)} />
+            )
+          }
+        />
+
+        {/* Home Page */}
+        <Route
+          path="/home"
+          element={
+            isLoggedIn ? (
+              <div className="min-h-screen bg-black text-white">
+                <Navbar onLogout={handleLogout} />
+                <Hero />
+                <Search />
+                <WatchlistForm />
+                <LayoutCard />
+              </div>
+            ) : (
+              <Navigate to="/" replace />
+            )
           }
         />
 
         {/* Movie Detail Page */}
-        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route 
+          path="/movie/:id" 
+          element={
+            isLoggedIn ? (
+              <MovieDetail />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          } 
+        />
       </Routes>
     </Router>
   )
