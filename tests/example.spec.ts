@@ -3,11 +3,10 @@ import { test, expect } from '@playwright/test';
 
 test.describe("Home Page",()=>{
 
-  test.beforeEach(async ({page})=> {
+   test.beforeEach(async ({page})=>{
 
-      await page.goto("http://localhost:5173/home")
-
-  })
+    await page.goto("http://localhost:5173")
+   })
 
 test("should have correct metadata and elements",async ({page})=>{
 

@@ -59,9 +59,16 @@ function LayoutCard() {
         }
     }
 
+ 
     useEffect(()=>{
         fetchDataFromApi(url)
     },[page,querry])
+
+
+    useEffect(()=>{
+      console.log("check results here ",movieDetails?.results);
+      
+    },[movieDetails])
 
 
 return (

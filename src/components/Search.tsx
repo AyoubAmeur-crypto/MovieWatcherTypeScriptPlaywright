@@ -27,6 +27,7 @@ function Search() {
             <div className="relative flex-1">
               <input
                 type="text"
+                data-testid="search-input"
                 onChange={(e)=>setSearchQuerry(e.target.value)}
                 value={searchQuerry}
                 placeholder="Search movies by title, actor, director..."
@@ -80,6 +81,7 @@ function Search() {
                 hover:brightness-110
                 active:scale-95
               "
+              data-testid="search-button"
               onClick={(e)=>{
                 e.preventDefault()
                 setQuerry(searchQuerry)

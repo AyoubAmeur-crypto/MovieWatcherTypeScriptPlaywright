@@ -39,4 +39,54 @@ test.describe("mock movie api",()=>{
 
     })
 
+
+
+    test("mock api from search button",async ({page})=>{
+
+
+
+        await page.route("**/3/search/**",async route => {
+
+
+
+            const fakeData = {
+
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify({
+                    page: 1,
+                    total_pages: 1,
+                    total_results: 2,
+                    results: [
+                        { id: 1, title: 'Fake Movie', poster_path: '/fake.jpg', vote_average: 8.5 },
+                        { id: 2, title: 'Another Movie', poster_path: '/fake2.jpg', vote_average: 7.0 },
+                    ]
+                })
+
+            }
+
+
+            await route.fulfill(fakeData)
+        })
+
+
+        await page.getByTestId("login-username").fill("user1234")
+        await page.getByTestId("login-password").fill("password")
+        await page.getByTestId("login-button").click()
+
+
+        await page.getByTestId("search-input").fill("fake test movie")
+
+        await page.getByTestId("search-button").click()
+
+
+        await expect(page.getByText("Fake Movie")).toBeVisible()
+
+
+
+
+
+
+    })
+
     })
