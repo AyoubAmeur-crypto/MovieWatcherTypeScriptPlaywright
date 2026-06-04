@@ -13,6 +13,7 @@ test.describe("mock movie api",()=>{
     test("fetch fake data",async({page})=>{
 
         // Mock the popular movies endpoint
+        await page.pause()
         await page.route("**/3/movie/popular**", async route => {
             const fakeData = {
                 status: 200,
