@@ -109,47 +109,85 @@ return (
 </section>
   ) : (
     <div className="">
-         <section
-      className="
-        mx-auto
-        grid
-        max-w-7xl
-        gap-4
-        px-4
-        pb-10
-        grid-cols-1
-        sm:grid-cols-2
-        sm:gap-5
-        sm:px-5
-        md:grid-cols-3
-        md:gap-6
-        md:px-6
-        lg:grid-cols-4
-        lg:gap-7
-        lg:px-6
-        xl:grid-cols-4
-        2xl:grid-cols-4
-      "
-    >
-      {/* cards */}
-      {movieDetails?.results.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          id={movie.id}
-          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          rating={movie.vote_average}
-          title={movie.title}
-          releaseDate={movie.release_date}
-        />
-      ))}
-      
-     
-    </section>
+      {movieDetails?.results && movieDetails.results.length === 0 ? (
+        <section
+          data-testid="no-movies-found"
+          className="mx-auto w-full max-w-7xl px-6 py-20"
+        >
+          <div
+            className="flex flex-col items-center justify-center gap-4 rounded-2xl py-16 text-center"
+            style={{
+              background: 'rgba(255,255,255,0.02)',
+              border: '1px solid rgba(255,255,255,0.05)',
+            }}
+          >
+            <div
+              className="flex h-16 w-16 items-center justify-center rounded-full"
+              style={{ background: 'rgba(255,255,255,0.04)' }}
+            >
+              <svg
+                className="h-8 w-8 text-zinc-500"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white">No Movies Found</h3>
+            <p className="max-w-xs text-sm text-zinc-400">
+              We couldn't find any movies matching your selection. Try a different search term.
+            </p>
+          </div>
+        </section>
+      ) : (
+        <>
+          <section
+            className="
+              mx-auto
+              grid
+              max-w-7xl
+              gap-4
+              px-4
+              pb-10
+              grid-cols-1
+              sm:grid-cols-2
+              sm:gap-5
+              sm:px-5
+              md:grid-cols-3
+              md:gap-6
+              md:px-6
+              lg:grid-cols-4
+              lg:gap-7
+              lg:px-6
+              xl:grid-cols-4
+              2xl:grid-cols-4
+            "
+          >
+            {/* cards */}
+            {movieDetails?.results.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                id={movie.id}
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                rating={movie.vote_average}
+                title={movie.title}
+                releaseDate={movie.release_date}
+              />
+            ))}
+          </section>
 
-     <Pagination 
-  totalPages={movieDetails?.total_pages || 1} 
-  totalResults={movieDetails?.total_results}
-/>
+          <Pagination
+            totalPages={movieDetails?.total_pages || 1}
+            totalResults={movieDetails?.total_results}
+          />
+        </>
+      )}
     </div>
  
     
