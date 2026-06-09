@@ -157,6 +157,7 @@ export default function WatchlistForm() {
                 {/* Remove button */}
                 <button
                   onClick={() => removeFromWatchlist(item.id)}
+                  name='remove'
                   data-testid={`delete-button-${item.id}`}
                   className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg opacity-0 transition-all duration-200 group-hover:opacity-100 active:scale-90"
                   style={{

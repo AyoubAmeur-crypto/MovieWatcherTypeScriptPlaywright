@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -8,12 +7,13 @@ import LayoutCard from './components/LayoutCard'
 import MovieDetail from './pages/MovieDetail'
 import WatchlistForm from './components/WatchlistForm'
 import Login from './components/Login'
+import { useMovieStore } from './zustand/movieStore'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isLogin, setLogin } = useMovieStore()
 
   const handleLogout = () => {
-    setIsLoggedIn(false)
+    setLogin(false)
   }
 
   return (
@@ -23,10 +23,10 @@ function App() {
         <Route
           path="/"
           element={
-            isLoggedIn ? (
+            isLogin ? (
               <Navigate to="/home" replace />
             ) : (
-              <Login onLogin={() => setIsLoggedIn(true)} />
+              <Login onLogin={() => setLogin(true)} />
             )
           }
         />
@@ -35,7 +35,7 @@ function App() {
         <Route
           path="/home"
           element={
-            isLoggedIn ? (
+            isLogin ? (
               <div className="min-h-screen bg-black text-white">
                 <Navbar onLogout={handleLogout} />
                 <Hero />
@@ -50,15 +50,15 @@ function App() {
         />
 
         {/* Movie Detail Page */}
-        <Route 
-          path="/movie/:id" 
+        <Route
+          path="/movie/:id"
           element={
-            isLoggedIn ? (
+            isLogin ? (
               <MovieDetail />
             ) : (
               <Navigate to="/" replace />
             )
-          } 
+          }
         />
       </Routes>
     </Router>

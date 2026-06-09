@@ -150,6 +150,7 @@ function MovieDetail() {
                 <h1
                   className="text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl"
                   style={{ textShadow: '0 4px 32px rgba(0,0,0,0.7)' }}
+                  data-testid="movieTitle"
                 >
                   {movie.title}
                 </h1>
