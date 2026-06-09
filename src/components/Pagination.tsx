@@ -32,14 +32,14 @@ function Pagination({
 
   const handlePrevious = () => {
     if (currentPage > 1) {
-      setDecremnetPage(currentPage - 1)
+      setDecremnetPage()
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
   const handleNext = () => {
     if (currentPage < totalPages) {
-      setIncrementPage(currentPage)
+      setIncrementPage()
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
@@ -91,12 +91,12 @@ function Pagination({
             onMouseEnter={e => {
               if (currentPage !== 1) {
                 (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'
-                ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.18)'
+                  ; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.18)'
               }
             }}
             onMouseLeave={e => {
-              ;(e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'
-              ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'
+              ; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'
+                ; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'
             }}
             aria-label="Previous page"
           >
@@ -151,12 +151,12 @@ function Pagination({
             onMouseEnter={e => {
               if (currentPage !== totalPages) {
                 (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'
-                ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.18)'
+                  ; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.18)'
               }
             }}
             onMouseLeave={e => {
-              ;(e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'
-              ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'
+              ; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'
+                ; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'
             }}
             aria-label="Next page"
           >
@@ -204,16 +204,16 @@ function PageBtn({
       style={
         active
           ? {
-              background: '#F5C518',
-              border: '1px solid #F5C518',
-              color: '#000',
-              boxShadow: '0 0 16px rgba(245,197,24,0.25)',
-            }
+            background: '#F5C518',
+            border: '1px solid #F5C518',
+            color: '#000',
+            boxShadow: '0 0 16px rgba(245,197,24,0.25)',
+          }
           : {
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(255,255,255,0.5)',
-            }
+            background: 'rgba(255,255,255,0.04)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            color: 'rgba(255,255,255,0.5)',
+          }
       }
       onMouseEnter={e => {
         if (!active) {
