@@ -14,7 +14,6 @@ test.describe("watchlist",()=>{
 
      homePage.addToWatchList("Watchlist 1")
      
-    const watchlistTitle = page.getByText("Watchlist 1")
 
     await expect(homePage.watchListitem.filter({
       hasText:"Watchlist 1"

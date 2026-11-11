@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 import dotenv from 'dotenv'
-import { dot } from 'node:test/reporters'
 import { LoginPage } from '../pages/LoginPage'
 import { HomePage } from '../pages/HomePage'
 

@@ -1,11 +1,10 @@
-import React from 'react'
-import type { ApiResponse, Movie } from '../types/movie'
+import type { ApiResponse } from '../types/movie'
 import axios from 'axios'
 
 
 const token = import.meta.env.VITE_TMDB_TOKEN
 
-export const useFetch = async (url:string)=>{
+export const fetchFromApi = async (url:string)=>{
 
 
     

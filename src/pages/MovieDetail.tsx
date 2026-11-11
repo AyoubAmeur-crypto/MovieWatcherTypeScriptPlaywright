@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useFetch } from '../customHooks/useFetch'
+import { fetchFromApi } from '../customHooks/useFetch'
 import type { Movie } from '../types/movie'
 import Navbar from '../components/Navbar'
 
@@ -14,7 +14,7 @@ function MovieDetail() {
     const fetchMovieDetails = async () => {
       try {
         setLoading(true)
-        const data = await useFetch(`https://api.themoviedb.org/3/movie/${id}`)
+        const data = await fetchFromApi(`https://api.themoviedb.org/3/movie/${id}`)
         if (data) setMovie(data)
       } catch (error) {
         console.log('Error fetching movie details:', error)

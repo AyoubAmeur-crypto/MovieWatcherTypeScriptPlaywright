@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import type { ApiResponse } from '../types/movie'
-import { useFetch } from '../customHooks/useFetch'
+import { fetchFromApi } from '../customHooks/useFetch'
 import MovieCard from './MovieCard'
 import Pagination from './Pagination'
 import { useMovieStore } from '../zustand/movieStore'
@@ -10,7 +10,7 @@ function LayoutCard() {
   const { page, querry, setIncrementPage } = useMovieStore()
 
   const [movieDetails, setMovieDetails] = useState<ApiResponse>()
-  const [loading, setLoading] = useState<Boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   // Reset page to 1 when query changes
   useEffect(() => {
@@ -29,7 +29,7 @@ function LayoutCard() {
     setLoading(true)
     try {
 
-      const data = await useFetch(url)
+      const data = await fetchFromApi(url)
 
       console.log("check heere ???");
 
@@ -60,8 +60,9 @@ function LayoutCard() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch data whenever the url changes
     fetchDataFromApi(url)
-  }, [page, querry])
+  }, [url])
 
 
   return (
